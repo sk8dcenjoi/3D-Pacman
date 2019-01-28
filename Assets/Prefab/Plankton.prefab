@@ -78,10 +78,11 @@ GameObject:
   - component: {fileID: 136712940370177114}
   - component: {fileID: 114581161156239856}
   - component: {fileID: 114267295082854014}
+  - component: {fileID: 114488898558551978}
   - component: {fileID: 54653659237808876}
   m_Layer: 0
   m_Name: Plankton
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,8 +156,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1526405609107582}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.82, y: 1.39, z: 3.32}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 7.798, y: 0.49, z: 3.32}
+  m_LocalScale: {x: 0.30301, y: 0.30301, z: 0.30301}
   m_Children:
   - {fileID: 4122277847758528}
   - {fileID: 4378976276194118}
@@ -470,7 +471,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &65034859257873308
 BoxCollider:
@@ -544,9 +545,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cam: {fileID: 0}
-  WalkSpeed: 10
+  WalkSpeed: 5
   RotationsSpeed: 5
   sensitivityX: 5
+--- !u!114 &114488898558551978
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526405609107582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eeb80262463c434386de4eba2613cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  badCoinCount: 0
+  coinCount: 0
+  count: 0
+  healthBar: {fileID: 0}
+  Powerup: 0
+  countText: {fileID: 0}
+  death: {fileID: 0}
+  win: {fileID: 0}
+  pickupSound: {fileID: 0}
+  pickupSoundBad: {fileID: 0}
+  pickupSoundSpecial: {fileID: 0}
 --- !u!114 &114581161156239856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -558,8 +581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b401788e23ad240a613be44671b263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shrinkSize: 0.5
-  growSize: 2
+  shrinkSize: 0.25
+  growSize: 1
   rateOfGrowth: 0.025
   size: 1
 --- !u!136 &136712940370177114
