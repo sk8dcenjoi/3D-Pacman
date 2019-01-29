@@ -642,7 +642,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1340686498449422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.698, y: 0.63, z: 21.53}
+  m_LocalPosition: {x: 8.8, y: 0.63, z: 7.2}
   m_LocalScale: {x: 0.5744, y: 0.2870564, z: 0.5744}
   m_Children:
   - {fileID: 4603015355604462}
@@ -1692,7 +1692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.2
-  CoinSpeed: 10
+  CoinSpeed: 2
   Player: {fileID: 0}
 --- !u!136 &136003809386839514
 CapsuleCollider:
