@@ -10,6 +10,7 @@ public class PlanktonHUD : MonoBehaviour
     public int coinCount;
     public int count;
     public Slider healthBar;
+    public Slider sprintBar;
     public bool Powerup = false;
     public Text countText;
     public AudioClip death;
@@ -46,11 +47,11 @@ public class PlanktonHUD : MonoBehaviour
 
 
         
-        if (col.gameObject.tag == "Poison")
+        if (col.gameObject.tag == "NastyPatty")
         {
-            AudioSource.PlayClipAtPoint(pickupSoundBad, this.transform.position);
+            //AudioSource.PlayClipAtPoint(pickupSoundBad, this.transform.position);
             badCoinCount++;
-            Debug.Log("Bad coins = "+badCoinCount);
+            Debug.Log("Bad food = "+badCoinCount);
 
             if (Powerup == false)
             {

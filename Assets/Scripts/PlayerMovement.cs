@@ -48,13 +48,18 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-                       transform.Translate(Vector3.forward * WalkSpeed * Time.deltaTime);
-           // transform.Translate(new Vector3(transform.position.x - Cam.transform.position.x, 0, transform.position.z - Cam.transform.position.z).normalized * WalkSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * WalkSpeed * Time.deltaTime);
+            // transform.Translate(new Vector3(transform.position.x - Cam.transform.position.x, 0, transform.position.z - Cam.transform.position.z).normalized * WalkSpeed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                transform.Translate(Vector3.forward * WalkSpeed * Time.deltaTime);
+                transform.GetComponent<PlanktonHUD>().sprintBar.value -= 5;
+            }
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-                       transform.Translate(-Vector3.forward * WalkSpeed * Time.deltaTime);
+            transform.Translate(-Vector3.forward * WalkSpeed * Time.deltaTime);
             //transform.Translate(-1 * new Vector3(transform.position.x - Cam.transform.position.x, 0, transform.position.z - Cam.transform.position.z).normalized * WalkSpeed * Time.deltaTime);
         }
 
@@ -67,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
             transform.Translate(Vector3.right * WalkSpeed * Time.deltaTime);
             
         }
+
         /*if (Input.GetKey(KeyCode.LeftControl))
         {
             
