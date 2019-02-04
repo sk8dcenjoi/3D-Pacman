@@ -8,6 +8,7 @@ public class Move : MonoBehaviour
     Animator anim;
     public float speed;
     public GameObject head;
+    bool walking;
     bool left;
 
     // Use this for initialization
@@ -20,28 +21,32 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (head.transform.rotation.z > .25f)
-         {
-            left = false;
-         }
-        if (head.transform.rotation.z < (-.25f))
+        //This deactivates headturn while chasing
+        if (walking == false)
         {
-            left = true;
-        }
+            if (head.transform.rotation.z > .25f)
+            {
+                left = false;
+            }
+            if (head.transform.rotation.z < (-.25f))
+            {
+                left = true;
+            }
 
-        if (left)
-        {
-            head.transform.Rotate(0, 20  * Time.deltaTime, 0, Space.World);
-        }
-        else
-        {
+            if (left)
+            {
+                head.transform.Rotate(0, 20 * Time.deltaTime, 0, Space.World);
+            }
+            else
+            {
 
-            head.transform.Rotate(0, -20 * Time.deltaTime, 0, Space.World);
+                head.transform.Rotate(0, -20 * Time.deltaTime, 0, Space.World);
+            }
         }
-
 
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
         {
+            walking = true;
             anim.SetBool("Walking", true);
             if (Input.GetKey(KeyCode.UpArrow))
             {
@@ -59,6 +64,7 @@ public class Move : MonoBehaviour
         else
         {
             anim.SetBool("Walking", false);
+            walking = false;
         }
     }
 }
