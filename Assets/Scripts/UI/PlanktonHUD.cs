@@ -23,6 +23,7 @@ public class PlanktonHUD : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        
         badCoinCount = 0;
         coinCount = 0;
         count = 0;
