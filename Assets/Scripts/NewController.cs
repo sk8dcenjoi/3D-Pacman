@@ -6,11 +6,13 @@ public class NewController : MonoBehaviour {
     public GameObject cam;
     public GameObject[] legs;
     public GameObject hitbox;
+    public bool flyActive;
     public float walkSpeed = 10;
     public float sprintSpeed = 5;
-    public float jumpHeight=2.5f;
+    public float jumpHeight=7f;
     public float forwardInput;
     public float turnInput;
+    public float verticalInput;
     public float sensitivityX = 5f;
     public float RotationsSpeed = 5.0f;
     Rigidbody plankBody;
@@ -19,7 +21,7 @@ public class NewController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log("PlayersInitiate");
+
         legs = GameObject.FindGameObjectsWithTag("PlayerLeg");
         hitbox = GameObject.FindGameObjectWithTag("Hitbox");
         cam = GameObject.FindGameObjectWithTag("MainCamera");
@@ -36,10 +38,13 @@ public class NewController : MonoBehaviour {
 	void Update () {
         forwardInput = Input.GetAxis("Vertical");
         turnInput = Input.GetAxis("Horizontal");
-        UpDown();
-        Turn();
-        Jump();
-        Duck();
+
+        if (flyActive == false)
+        {
+            UpDown();
+            Jump();
+            Duck();
+        }
 	}
     void LateUpdate()
     {
@@ -58,7 +63,16 @@ public class NewController : MonoBehaviour {
         }
 
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, Camera.main.transform.localEulerAngles.y, transform.localEulerAngles.z);
+        if (flyActive)
+        {
+            if (Input.GetKeyDown(KeyCode.Space)){
+                
+            plankBody.MovePosition(transform.position + new Vector3(0,0,7) * Time.deltaTime);
+            }
+            Fly();
+        }
     }
+
     void UpDown()
     {
         //rigBody.AddForce(new Vector3(forwardInput, 0, 0), ForceMode.Acceleration);
@@ -101,5 +115,35 @@ public class NewController : MonoBehaviour {
             legs[1].transform.localScale = new Vector3(1f, legs[1].transform.localScale.y, legs[1].transform.localScale.z);
         }
 
+    }
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "specialCoin")
+        {
+            Debug.Log("atecoin");
+            AbilityList(0);
+        }
+    }
+    private void Fly()
+    {
+        plankBody.useGravity = false;
+        var vec = transform.forward * forwardInput * 5 + transform.right * turnInput * 5 + transform.up * verticalInput *5;
+
+        plankBody.MovePosition(transform.position + vec * Time.deltaTime);
+        Debug.Log("Fly Activatedtest");
+    }
+
+
+    private IEnumerator AbilityList(int num)
+    {
+        if (num == 0)
+        {
+        flyActive = true;
+            yield return new WaitForSeconds(10f);
+            Debug.Log("Fly Activated");
+            flyActive = false;
+            yield return new WaitForSeconds(2f);
+
+        }
     }
 }

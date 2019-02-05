@@ -5,17 +5,19 @@ using System;
 
 public class Abilities : MonoBehaviour
 {
-
+    Rigidbody plankBody;
     private bool shrinkActive;
     public float shrinkSize;
     private bool growActive;
     public float growSize;
     public float rateOfGrowth;
     public float size;
+    public bool flyActive;
 
     // Use this for initialization
     void Start()
     {
+        plankBody = this.GetComponent<Rigidbody>();
         size = transform.localScale.x;
     }
 
@@ -31,6 +33,17 @@ public class Abilities : MonoBehaviour
         {
             Grow();
         }
+
+        if (flyActive)
+        {
+            Fly();
+        }
+    }
+
+    private void Fly()
+    {
+        plankBody.useGravity = false;
+
     }
 
     private void Shrink()
@@ -48,6 +61,8 @@ public class Abilities : MonoBehaviour
             transform.localScale += new Vector3(rateOfGrowth, rateOfGrowth, rateOfGrowth);
         }
     }
+
+
 
 
     void OnGUI()
@@ -70,7 +85,7 @@ public class Abilities : MonoBehaviour
         }
     }
 
-    private IEnumerator Resize(int num)
+    private IEnumerator AbilityList(int num)
     {
 
         if (num == 0)
@@ -88,6 +103,15 @@ public class Abilities : MonoBehaviour
             yield return new WaitForSeconds(3f);
             growActive = false;
             yield return new WaitForSeconds(2f);
+        }
+
+        if (num == 2)
+        {
+            flyActive = true;
+            yield return new WaitForSeconds(10f);
+            flyActive = false;
+            yield return new WaitForSeconds(2f);
+            
         }
 
     }

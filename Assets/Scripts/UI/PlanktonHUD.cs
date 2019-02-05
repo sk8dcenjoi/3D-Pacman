@@ -23,7 +23,7 @@ public class PlanktonHUD : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+
         badCoinCount = 0;
         coinCount = 0;
         count = 0;
@@ -99,10 +99,8 @@ public class PlanktonHUD : MonoBehaviour
 
         if (col.gameObject.tag == "specialCoin")
         {
-            AudioSource.PlayClipAtPoint(pickupSoundSpecial, this.transform.position);
+            //AudioSource.PlayClipAtPoint(pickupSoundSpecial, this.transform.position);
             healthBar.value = 100;
-
-            StartCoroutine(PowerUp());
         }
     }
     void SetCountText ()
