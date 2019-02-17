@@ -43,7 +43,7 @@ public class GridNavigation : MonoBehaviour {
                 //alert player
             }
             target = GetComponent<Vision>().plankton;
-            Debug.Log("Plankton");
+            //Debug.Log("Plankton");
             transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
             previouslySeen = true;
         }
@@ -77,7 +77,7 @@ public class GridNavigation : MonoBehaviour {
             //if (target != previousTarget)
             //{
                 transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
-                Debug.Log(currentDimensionX + " " + currentDimensionZ);
+                //Debug.Log(currentDimensionX + " " + currentDimensionZ);
             //}
         }
         else if ((transform.position - grid[currentDimensionX, currentDimensionZ].transform.position).magnitude < 3)
@@ -115,7 +115,7 @@ public class GridNavigation : MonoBehaviour {
             //if (target != previousTarget)
             //{
                 transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
-                Debug.Log(currentDimensionX + " " + currentDimensionZ);
+                //Debug.Log(currentDimensionX + " " + currentDimensionZ);
             //}
         }
         //move

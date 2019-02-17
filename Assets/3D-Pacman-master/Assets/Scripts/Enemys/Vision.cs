@@ -35,23 +35,23 @@ public class Vision : MonoBehaviour {
                 if (angle < 30.0f || (plankton.transform.position.y > jumpHeight && targetDir.magnitude < 20))
                 {
                     seen = true;
-                    Debug.Log("      SEEN");
+                    //Debug.Log("      SEEN");
                 }
                 else
                 {
                     seen = false;
-                    Debug.Log("Unseen: Not In Cone");
+                    //Debug.Log("Unseen: Not In Cone");
                 }
             }
             else
             {
                 seen = false;
-                Debug.Log("Unseen: Not Plankton");
+                //Debug.Log("Unseen: Not Plankton");
             }
         }
         else
         {
-            Debug.Log("Nothing Hit");
+            //Debug.Log("Nothing Hit");
         }
     }
 }

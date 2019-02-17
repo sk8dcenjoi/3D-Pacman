@@ -36,8 +36,8 @@ public class CoinScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("coincollision");
-        Debug.Log(other.gameObject.name);
+        //Debug.Log("coincollision");
+        //Debug.Log(other.gameObject.name);
 
 
         if (other.gameObject.tag == "Player")

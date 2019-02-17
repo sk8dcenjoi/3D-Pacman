@@ -20,6 +20,7 @@ public class FollowCamera : MonoBehaviour
     public float speedH = 2.0f;
     private Transform cameraTransform;
     private Vector3 LookAtMe;
+	private Vector3 currentRotation;
     //Vector3 PreviousPlayerPosition;
     Vector3 newPos;
 
@@ -31,6 +32,7 @@ public class FollowCamera : MonoBehaviour
         Cursor.visible = true;
         cameraOffset = transform.position - PlayerTransform.position;
         altCameraOffset = transform.position - PlayerTransform.position; 
+		currentRotation = transform.rotation.eulerAngles;
         //PreviousPlayerPosition = PlayerTransform.position;
 
 
@@ -66,6 +68,7 @@ public class FollowCamera : MonoBehaviour
         
         
         transform.position = Vector3.Slerp(transform.position, newPos, SmoothFactor);
+		transform.position = new Vector3 (transform.position.x, Mathf.Clamp (transform.position.y, 1f, 6f), transform.position.z);
         LookAtMe = (PlayerTransform.position + (PlayerTransform.position - transform.position));
         //PlayerTransform.LookAt(new Vector3(LookAtMe.x, PlayerTransform.position.y, LookAtMe.z));
 
@@ -74,87 +77,4 @@ public class FollowCamera : MonoBehaviour
         //PreviousPlayerPosition = PlayerTransform.position;
     }
 }
-
-
-/*public class FollowCamera : MonoBehaviour
-{
-
-    public float sensitivity = 4.0f;
-    private Vector3 mouseOrigin;
-    private bool isRotating;
-    public GameObject cam;
-
-    void Start()
-    {
-    }
-
-    protected float ClampAngle(float angle, float min, float max)
-    {
-
-        angle = NormalizeAngle(angle);
-        if (angle > 180)
-        {
-            angle -= 360;
-        }
-        else if (angle < -180)
-        {
-            angle += 360;
-        }
-
-        min = NormalizeAngle(min);
-        if (min > 180)
-        {
-            min -= 360;
-        }
-        else if (min < -180)
-        {
-            min += 360;
-        }
-
-        max = NormalizeAngle(max);
-        if (max > 180)
-        {
-            max -= 360;
-        }
-        else if (max < -180)
-        {
-            max += 360;
-        }
-
-        return Mathf.Clamp(angle, min, max);
-    }
-
-    protected float NormalizeAngle(float angle)
-    {
-        while (angle > 360)
-            angle -= 360;
-        while (angle < 0)
-            angle += 360;
-        return angle;
-    }
-
-
-    void Update()
-    {
-
-        if (Input.GetMouseButtonDown(0))
-        {
-
-            mouseOrigin = Input.mousePosition;
-            isRotating = true;
-        }
-
-        if (!Input.GetMouseButton(0))
-            isRotating = false;
-
-        if (isRotating)
-        {
-
-            cam.transform.localEulerAngles = new Vector3(0, ClampAngle(cam.transform.localEulerAngles.y, -45, 45), 0);
-            Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
-            transform.RotateAround(transform.position, transform.right, -pos.y * sensitivity);
-            transform.RotateAround(transform.position, Vector3.up, pos.x * sensitivity);
-        }
-    }
-}*/
 
