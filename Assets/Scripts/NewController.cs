@@ -45,7 +45,13 @@ public class NewController : MonoBehaviour {
             Jump();
             Duck();
         }
-	}
+        if (flyActive)
+        {
+            Fly();
+
+
+        }
+    }
     void LateUpdate()
     {
 
@@ -63,14 +69,9 @@ public class NewController : MonoBehaviour {
         }
 
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, Camera.main.transform.localEulerAngles.y, transform.localEulerAngles.z);
-        if (flyActive)
-        {
-            if (Input.GetKeyDown(KeyCode.Space)){
-                
-            plankBody.MovePosition(transform.position + new Vector3(0,0,7) * Time.deltaTime);
-            }
-            Fly();
-        }
+
+
+
     }
 
     void UpDown()
@@ -78,7 +79,7 @@ public class NewController : MonoBehaviour {
         //rigBody.AddForce(new Vector3(forwardInput, 0, 0), ForceMode.Acceleration);
         var vec = transform.forward * forwardInput * 5 + transform.right * turnInput * 5;
 
-        plankBody.MovePosition(transform.position + vec * Time.deltaTime);
+        plankBody.MovePosition (transform.position + vec * Time.deltaTime);
     }
     void Turn()
     {
@@ -120,8 +121,9 @@ public class NewController : MonoBehaviour {
     {
         if (col.gameObject.tag == "specialCoin")
         {
+
+            StartCoroutine(AbilityList(0));
             Debug.Log("atecoin");
-            AbilityList(0);
         }
     }
     private void Fly()
@@ -129,8 +131,12 @@ public class NewController : MonoBehaviour {
         plankBody.useGravity = false;
         var vec = transform.forward * forwardInput * 5 + transform.right * turnInput * 5 + transform.up * verticalInput *5;
 
+        plankBody.transform.position = transform.position + transform.up * 5 * Time.deltaTime;
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Debug.Log("upvector");
+        }
         plankBody.MovePosition(transform.position + vec * Time.deltaTime);
-        Debug.Log("Fly Activatedtest");
     }
 
 
@@ -138,10 +144,14 @@ public class NewController : MonoBehaviour {
     {
         if (num == 0)
         {
-        flyActive = true;
+            Debug.Log("Fly countdown");
+            flyActive = true;
             yield return new WaitForSeconds(10f);
-            Debug.Log("Fly Activated");
+            
             flyActive = false;
+            Debug.Log("fly over");
+            plankBody.useGravity = true;
+
             yield return new WaitForSeconds(2f);
 
         }
