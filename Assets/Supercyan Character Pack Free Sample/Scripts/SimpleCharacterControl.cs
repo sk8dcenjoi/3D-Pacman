@@ -19,6 +19,7 @@ public class SimpleCharacterControl : MonoBehaviour {
 
     private float m_currentV = 0;
     private float m_currentH = 0;
+    private bool idle;
 
     private readonly float m_interpolation = 10;
     private readonly float m_walkScale = 0.33f;
@@ -117,7 +118,8 @@ public class SimpleCharacterControl : MonoBehaviour {
 
         if (v < 0) {
             if (walk) { v *= m_backwardsWalkScale; }
-            else { v *= m_backwardRunScale; }
+            else { v *= m_backwardRunScale;
+            }
         } else if (walk)
         {
             v *= m_walkScale;
@@ -129,7 +131,23 @@ public class SimpleCharacterControl : MonoBehaviour {
         transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
         transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
         
-        m_animator.SetFloat("MoveSpeed", m_currentV);
+        if(v > 0)
+        {
+            idle = false;
+            m_animator.SetFloat("MoveSpeed", m_currentV);
+            m_animator.SetBool("Idle", idle);
+        }
+        else if (v == 0)
+        {
+            idle = true;
+            m_animator.SetBool("Idle", idle);
+        }
+        else if (v < 0)
+        {
+            idle = false;
+            m_animator.SetBool("Idle", idle);
+            m_animator.SetFloat("MoveSpeed", m_currentV);
+        }
 
         JumpingAndLanding();
     }
