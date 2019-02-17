@@ -8,7 +8,10 @@ TagManager:
   - NastyPatty
   - PlayerLeg
   - Hitbox
-  - specialCoin
+  - Enemy
+  - Bus
+  - MegaChomp
+  - Fly
   layers:
   - Default
   - TransparentFX
