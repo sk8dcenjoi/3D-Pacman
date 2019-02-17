@@ -93,7 +93,7 @@ public class PlanktonHUD : MonoBehaviour
 
         if (col.gameObject.tag == "NastyPatty")
         {
-            if(canPlay)
+			if(canPlay && healthBar.value != 0)
             {
                 mainAudio.clip = pickupSoundBad;
                 mainAudio.Play();
@@ -120,8 +120,7 @@ public class PlanktonHUD : MonoBehaviour
 
         if (col.gameObject.tag == "Burger")
         {
-            Debug.Log(Powerup + "burger test");
-            if (canPlay)
+            if (canPlay && coinCount != 20)
             {
                 mainAudio.clip = pickupSound;
                 mainAudio.Play();
@@ -186,6 +185,7 @@ public class PlanktonHUD : MonoBehaviour
 
         private IEnumerator PowerUp()
        {
+    {
         Powerup = true;
         Debug.Log("timer initiated");
 
@@ -194,18 +194,20 @@ public class PlanktonHUD : MonoBehaviour
       
         Powerup = false;
 
-        }
-   
+    }
+
     private IEnumerator Winner()
     {
-        AudioSource.PlayClipAtPoint(win, this.transform.position);
+		mainAudio.clip = win;
+		mainAudio.Play ();
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("GameWon");
     }
     private IEnumerator Loser()
     {
         Debug.Log("dead?");
-        AudioSource.PlayClipAtPoint(death, this.transform.position);
+		mainAudio.clip = death;
+		mainAudio.Play ();
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("GameOver");
     }

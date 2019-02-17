@@ -9,7 +9,6 @@ public enum States {bus,onFoot }
         Tank,
         Direct
     }
-    public class PlanktonHud { }
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
     [SerializeField] private float m_jumpForce = 4;
@@ -20,6 +19,7 @@ public enum States {bus,onFoot }
 
     private float m_currentV = 0;
     private float m_currentH = 0;
+    private bool idle;
 
     private readonly float m_interpolation = 10;
     private readonly float m_walkScale = 0.33f;
@@ -118,7 +118,8 @@ public enum States {bus,onFoot }
 
         if (v < 0) {
             if (walk) { v *= m_backwardsWalkScale; }
-            else { v *= m_backwardRunScale; }
+            else { v *= m_backwardRunScale;
+            }
         } else if (walk)
         {
             v *= m_walkScale;
@@ -159,6 +160,24 @@ public enum States {bus,onFoot }
 
 
         }
+        if(v > 0)
+        {
+            idle = false;
+            m_animator.SetFloat("MoveSpeed", m_currentV);
+            m_animator.SetBool("Idle", idle);
+        }
+        else if (v == 0)
+        {
+            idle = true;
+            m_animator.SetBool("Idle", idle);
+        }
+        else if (v < 0)
+        {
+            idle = false;
+            m_animator.SetBool("Idle", idle);
+            m_animator.SetFloat("MoveSpeed", m_currentV);
+        }
+
         JumpingAndLanding();
     }
 
@@ -195,6 +214,8 @@ public enum States {bus,onFoot }
 
         }
         
+        }
+
         JumpingAndLanding();
     }
 
