@@ -8,7 +8,7 @@ TagManager:
   - NastyPatty
   - PlayerLeg
   - Hitbox
-  - specialCoin
+  - Enemy
   layers:
   - Default
   - TransparentFX
