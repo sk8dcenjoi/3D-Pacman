@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 0eeb80262463c434386de4eba2613cbd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - healthBar: {instanceID: 0}
+  - countText: {instanceID: 0}
+  - death: {instanceID: 0}
+  - power: {fileID: 8300000, guid: 89686c7d44eff6a4da0e85208b4c4522, type: 3}
+  - win: {instanceID: 0}
+  - pickupSound: {instanceID: 0}
+  - pickupSoundBad: {instanceID: 0}
+  - pickupSoundSpecial: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
